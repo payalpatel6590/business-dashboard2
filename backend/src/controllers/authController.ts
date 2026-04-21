@@ -34,8 +34,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       name: user.name,
       email: user.email,
       role: user.role,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      // createdAt: user.createdAt,
+      // updatedAt: user.updatedAt
     };
 
     res.status(201).json({
@@ -86,8 +86,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       name: user.name,
       email: user.email,
       role: user.role,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      // createdAt: user.createdAt,
+      // updatedAt: user.updatedAt
     };
 
     res.status(200).json({
@@ -112,8 +112,8 @@ export const getProfile = async (req: AuthRequest, res: Response): Promise<void>
       name: req.user!.name,
       email: req.user!.email,
       role: req.user!.role,
-      createdAt: req.user!.createdAt,
-      updatedAt: req.user!.updatedAt
+      // createdAt: req.user!.createdAt,
+      // updatedAt: req.user!.updatedAt
     };
 
     res.status(200).json({

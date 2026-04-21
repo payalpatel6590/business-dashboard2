@@ -51,7 +51,7 @@ UserSchema.pre('save', async function() {
   try {
     // Hash the password with cost of 10
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+    user.password = await bcrypt.hash(user.password as string, salt);
   } catch (error) {
     throw new Error('Password hashing failed');
   }
