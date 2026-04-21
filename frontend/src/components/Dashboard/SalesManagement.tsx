@@ -33,7 +33,7 @@ const SalesManagement: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, [filters, dashboardAPI]);
+  }, [filters]);
 
   useEffect(() => {
     fetchSales();

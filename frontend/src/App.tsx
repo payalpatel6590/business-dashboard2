@@ -16,7 +16,7 @@ import AnalyticsPage from './components/Dashboard/AnalyticsPage';
 import AboutPage from './components/Pages/AboutPage';
 import './index.css';
 
-function App() {
+function AppContent() {
   const { isLoading } = useAuth();
 
   if (isLoading) {
@@ -28,31 +28,37 @@ function App() {
   }
 
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard/*" element={
-              <ProtectedRoute>
-                <DashboardLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<DashboardHome />} />
-              <Route path="analytics" element={<AnalyticsPage />} />
-              <Route path="sales" element={<SalesManagement />} />
-              <Route path="revenue" element={<RevenueManagement />} />
-              <Route path="history" element={<HistoryTimeline />} />
-              <Route path="portfolio" element={<Portfolio />} />
-            </Route>
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard/*" element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }>
+          <Route index element={<DashboardHome />} />
+          <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="sales" element={<SalesManagement />} />
+          <Route path="revenue" element={<RevenueManagement />} />
+          <Route path="history" element={<HistoryTimeline />} />
+          <Route path="portfolio" element={<Portfolio />} />
+        </Route>
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

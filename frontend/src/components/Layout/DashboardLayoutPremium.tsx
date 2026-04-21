@@ -3,7 +3,6 @@ import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/AuthContext";
-import { useTheme } from "../../contexts/ThemeContext";
 import ThemeToggle from "../Common/ThemeToggle";
 import {
   CurrencyDollarIcon,
@@ -20,8 +19,6 @@ import {
   BriefcaseIcon,
   ClockIcon,
   ChartBarIcon,
-  DocumentTextIcon,
-  Cog6ToothIcon,
   SparklesIcon
 } from "@heroicons/react/24/outline";
 
@@ -41,7 +38,6 @@ const DashboardLayoutPremium: React.FC = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const { user, logout } = useAuth();
-  const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import { 
   BriefcaseIcon, 
-  AcademicCapIcon,
-  DocumentTextIcon,
   CodeBracketIcon,
   ServerIcon,
   GlobeAltIcon
