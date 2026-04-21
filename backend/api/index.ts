@@ -1,13 +1,12 @@
-import express from 'express';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import express from 'express';
 import dotenv from 'dotenv';
-import { createServer } from 'http';
-import { Server } from 'socket.io';
-import connectDB from './config/database';
-import authRoutes from './routes/auth';
-import dashboardRoutes from './routes/dashboard';
+import connectDB from '../src/config/database';
+import authRoutes from '../src/routes/auth';
+import dashboardRoutes from '../src/routes/dashboard';
 
 // Load environment variables
 dotenv.config();
@@ -16,21 +15,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const server = createServer(app);
-
-// Socket.IO setup
-const io = new Server(server, {
-  cors: {
-    origin: [
-      process.env.FRONTEND_URL || 'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:3002',
-      'http://localhost:3003'
-    ],
-    methods: ['GET', 'POST'],
-    credentials: true
-  }
-});
 
 // Rate limiting
 const limiter = rateLimit({
@@ -87,33 +71,4 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// Socket.IO connection handling
-io.on('connection', (socket) => {
-  console.log('Client connected:', socket.id);
-
-  // Join room for real-time updates
-  socket.on('join-dashboard', (userId) => {
-    socket.join(`dashboard-${userId}`);
-    console.log(`User ${userId} joined dashboard room`);
-  });
-
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
-  });
-});
-
-// Make io available to other modules
-export { io };
-
-// For Vercel serverless deployment
 export default app;
-
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  });
-}
