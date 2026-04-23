@@ -8,7 +8,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdvancedThemeToggle: React.FC = () => {
-  const { theme, effectiveTheme, toggleTheme, isTransitioning } = useAdvancedTheme();
+  const { theme, effectiveTheme, toggleTheme, isTransitioning, isSystemDark } = useAdvancedTheme();
   const [showTooltip, setShowTooltip] = useState(false);
 
   const getThemeIcon = () => {

@@ -3,7 +3,6 @@ import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/AuthContext";
-import { useAdvancedTheme } from "../../contexts/AdvancedThemeContext";
 import AdvancedThemeToggle from "../Common/AdvancedThemeToggle";
 import {
   CurrencyDollarIcon,

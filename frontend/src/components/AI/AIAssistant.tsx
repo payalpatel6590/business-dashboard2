@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAdvancedTheme } from '../../contexts/AdvancedThemeContext';
 import { 
   SparklesIcon,
-  ChatBubbleLeftRightIcon,
   XMarkIcon,
   PaperAirplaneIcon,
   Cog6ToothIcon
@@ -26,7 +25,7 @@ interface AIInsight {
 }
 
 const AIAssistant: React.FC = () => {
-  const { colors, effectiveTheme } = useAdvancedTheme();
+  const { effectiveTheme } = useAdvancedTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<AIMessage[]>([
     {

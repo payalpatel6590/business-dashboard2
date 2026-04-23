@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAdvancedTheme } from '../../contexts/AdvancedThemeContext';
 import {
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   SparklesIcon,
   ChartBarIcon,
-  CurrencyDollarIcon,
-  UserGroupIcon,
   ArrowPathIcon
 } from '@heroicons/react/24/outline';
 import {
   LineChart,
   Line,
-  AreaChart,
-  Area,
   BarChart,
   Bar,
   XAxis,
@@ -24,12 +20,7 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar
+  Cell
 } from 'recharts';
 
 interface AIMetric {
@@ -128,10 +119,11 @@ const AIAnalytics: React.FC = () => {
   ];
 
   const performanceRadar = [
-    metric: 'Sales Growth',
-    current: 85,
-    target: 90
-  },
+    {
+      metric: 'Sales Growth',
+      current: 85,
+      target: 90
+    },
     {
       metric: 'Customer Satisfaction',
       current: 78,
@@ -272,9 +264,9 @@ const AIAnalytics: React.FC = () => {
                   'bg-gray-100 text-gray-600'}
               `}>
                 {metric.trend === 'up' ? (
-                  <TrendingUpIcon className="h-4 w-4" />
+                  <ArrowTrendingUpIcon className="h-4 w-4" />
                 ) : metric.trend === 'down' ? (
-                  <TrendingDownIcon className="h-4 w-4" />
+                  <ArrowTrendingDownIcon className="h-4 w-4" />
                 ) : (
                   <ChartBarIcon className="h-4 w-4" />
                 )}
@@ -436,7 +428,7 @@ const AIAnalytics: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Performance Radar */}
+        {/* Performance Analysis */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -451,34 +443,37 @@ const AIAnalytics: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Performance Analysis
           </h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <RadarChart data={performanceRadar}>
-              <PolarGrid stroke={colors.border} />
-              <PolarAngleAxis dataKey="metric" stroke={colors.textSecondary} />
-              <PolarRadiusAxis stroke={colors.textSecondary} />
-              <Radar
-                name="Current"
-                dataKey="current"
-                stroke={colors.primary}
-                fill={colors.primary}
-                fillOpacity={0.3}
-              />
-              <Radar
-                name="Target"
-                dataKey="target"
-                stroke={colors.accent}
-                fill={colors.accent}
-                fillOpacity={0.1}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: effectiveTheme === 'dark' ? colors.surface : colors.background,
-                  border: `1px solid ${colors.border}`,
-                  borderRadius: '8px'
-                }}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
+          <div className="space-y-4">
+            {performanceRadar.map((item, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <span className="text-gray-900 dark:text-white">{item.metric}</span>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-blue-500 h-2 rounded-full"
+                        style={{ width: `${item.current}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {item.current}%
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-purple-500 h-2 rounded-full"
+                        style={{ width: `${item.target}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {item.target}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
 
