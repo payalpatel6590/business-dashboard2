@@ -52,8 +52,6 @@ app.use((0, cors_1.default)({
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-// Handle preflight requests
-app.options("*", (0, cors_1.default)());
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
 // Routes
