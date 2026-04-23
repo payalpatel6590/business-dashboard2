@@ -14,7 +14,7 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/outline";
 
-const socket = io("http://localhost:5000"); // 🔁 your backend
+const socket = io(process.env.REACT_APP_SOCKET_URL);
 
 const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

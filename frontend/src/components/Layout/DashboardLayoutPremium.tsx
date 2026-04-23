@@ -23,7 +23,7 @@ import {
   CpuChipIcon
 } from "@heroicons/react/24/outline";
 
-const socket = io("http://localhost:5000", {
+const socket = io(process.env.REACT_APP_SOCKET_URL, {
   withCredentials: true
 });
 
