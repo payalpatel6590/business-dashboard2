@@ -14,7 +14,10 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/outline";
 
-const socket = io(process.env.REACT_APP_SOCKET_URL);
+// Only connect to Socket.IO in development or if URL is available
+const socket = process.env.REACT_APP_SOCKET_URL && !window.location.hostname.includes('vercel.app') 
+  ? io(process.env.REACT_APP_SOCKET_URL)
+  : null;
 
 const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

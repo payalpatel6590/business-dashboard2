@@ -23,9 +23,12 @@ import {
   CpuChipIcon
 } from "@heroicons/react/24/outline";
 
-const socket = io(process.env.REACT_APP_SOCKET_URL, {
-  withCredentials: true
-});
+// Only connect to Socket.IO in development or if URL is available
+const socket = process.env.REACT_APP_SOCKET_URL && !window.location.hostname.includes('vercel.app') 
+  ? io(process.env.REACT_APP_SOCKET_URL, {
+      withCredentials: true
+    })
+  : null;
 
 interface Notification {
   id: string;
@@ -114,21 +117,21 @@ const DashboardLayoutPremium: React.FC = () => {
 
   // Real-time notifications
   useEffect(() => {
-    socket.on("notification", (data: { message: string; type: string }) => {
-      const newNotification: Notification = {
-        id: Date.now().toString(),
-        message: data.message,
-        type: data.type as "info" | "success" | "warning" | "error",
-        timestamp: new Date(),
-        read: false
-      };
-      setNotifications((prev) => [newNotification, ...prev]);
+    if (!socket) return;
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('notification', (notification: Notification) => {
+      setNotifications(prev => [notification, ...prev].slice(0, 5));
     });
 
     return () => {
-      socket.off("notification");
+      socket.off('connect');
+      socket.off('notification');
     };
-  }, []);
+  }, [socket]);
 
   const markNotificationAsRead = (id: string) => {
     setNotifications((prev) =>
