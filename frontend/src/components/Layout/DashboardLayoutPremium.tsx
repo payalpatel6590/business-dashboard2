@@ -22,7 +22,9 @@ import {
   SparklesIcon
 } from "@heroicons/react/24/outline";
 
-const socket = io("http://localhost:5000");
+const socket = io("http://localhost:5000", {
+  withCredentials: true
+});
 
 interface Notification {
   id: string;

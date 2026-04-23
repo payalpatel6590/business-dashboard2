@@ -29,8 +29,9 @@ const io = new socket_io_1.Server(server, {
             'http://localhost:3002',
             'http://localhost:3003'
         ],
-        methods: ['GET', 'POST'],
-        credentials: true
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization']
     }
 });
 exports.io = io;
@@ -53,7 +54,9 @@ app.use((0, cors_1.default)({
         'http://localhost:3002',
         'http://localhost:3003'
     ],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
