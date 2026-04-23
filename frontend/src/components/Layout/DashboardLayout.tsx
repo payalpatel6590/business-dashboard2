@@ -40,6 +40,8 @@ const DashboardLayout: React.FC = () => {
 
   // 🔴 Real-time notifications
   useEffect(() => {
+    if (!socket) return;
+
     socket.on("notification", (data: string) => {
       setNotifications((prev) => [data, ...prev]);
     });
