@@ -23,12 +23,14 @@ import {
   CpuChipIcon
 } from "@heroicons/react/24/outline";
 
-// Only connect to Socket.IO in development or if URL is available
-const socket = process.env.REACT_APP_SOCKET_URL && !window.location.hostname.includes('vercel.app') 
-  ? io(process.env.REACT_APP_SOCKET_URL, {
-      withCredentials: true
-    })
-  : null;
+// Environment-based Socket.IO configuration
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 
+  (process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5000');
+
+// Connect to Socket.IO in both development and production
+const socket = SOCKET_URL ? io(SOCKET_URL, {
+  withCredentials: true
+}) : null;
 
 interface Notification {
   id: string;
