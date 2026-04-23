@@ -39,27 +39,33 @@ api.interceptors.response.use(
 );
 
 // Auth API
+
+
 export const authAPI = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/login', credentials);
+    const response = await api.post('/api/auth/login', credentials);
     return response.data.data!;
   },
 
   register: async (credentials: RegisterCredentials): Promise<AuthResponse> => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/register', credentials);
+    const response = await api.post('/api/auth/register', credentials);
     return response.data.data!;
   },
 
   getProfile: async (): Promise<any> => {
-    const response = await api.get<ApiResponse>('/auth/profile');
+    const response = await api.get('/api/auth/profile');
     return response.data.data;
   },
 };
 
+
+
 // Dashboard API
+
+
 export const dashboardAPI = {
   getStats: async (): Promise<DashboardStats> => {
-    const response = await api.get<ApiResponse<DashboardStats>>('/dashboard/stats');
+    const response = await api.get('/api/dashboard/stats');
     return response.data.data!;
   },
 
@@ -69,7 +75,7 @@ export const dashboardAPI = {
     if (filters?.endDate) params.append('endDate', filters.endDate);
     if (filters?.category) params.append('category', filters.category);
     
-    const response = await api.get<ApiResponse<Sale[]>>(`/dashboard/sales?${params}`);
+    const response = await api.get(`/api/dashboard/sales?${params}`);
     return response.data.data!;
   },
 
@@ -79,22 +85,22 @@ export const dashboardAPI = {
     if (filters?.endDate) params.append('endDate', filters.endDate);
     if (filters?.source) params.append('source', filters.source);
     
-    const response = await api.get<ApiResponse<Revenue[]>>(`/dashboard/revenue?${params}`);
+    const response = await api.get(`/api/dashboard/revenue?${params}`);
     return response.data.data!;
   },
 
   getChartData: async (type: 'sales' | 'revenue', period: string): Promise<ChartData> => {
-    const response = await api.get<ApiResponse<ChartData>>(`/dashboard/chart?type=${type}&period=${period}`);
+    const response = await api.get(`/api/dashboard/chart?type=${type}&period=${period}`);
     return response.data.data!;
   },
 
   createSale: async (saleData: SaleFormData): Promise<Sale> => {
-    const response = await api.post<ApiResponse<Sale>>('/dashboard/sales', saleData);
+    const response = await api.post('/api/dashboard/sales', saleData);
     return response.data.data!;
   },
 
   createRevenue: async (revenueData: RevenueFormData): Promise<Revenue> => {
-    const response = await api.post<ApiResponse<Revenue>>('/dashboard/revenue', revenueData);
+    const response = await api.post('/api/dashboard/revenue', revenueData);
     return response.data.data!;
   },
 };

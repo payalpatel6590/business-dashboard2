@@ -42,6 +42,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+// ✅ CORRECT
+// axios.post('/api/auth/login', data)
 app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
