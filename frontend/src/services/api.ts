@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { ApiResponse, AuthResponse, LoginCredentials, RegisterCredentials, DashboardStats, Sale, Revenue, ChartData, SaleFormData, RevenueFormData } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://business-dashboard2.onrender.com/api';
+
+// Debug: Log the API base URL
+console.log('API_BASE_URL:', API_BASE_URL);
 
 // Create axios instance
 const api = axios.create({

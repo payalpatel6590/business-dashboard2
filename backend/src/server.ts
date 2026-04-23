@@ -51,6 +51,9 @@ app.use(cors({
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests
+app.options("*", cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -106,11 +109,9 @@ export { io };
 // For Vercel serverless deployment
 export default app;
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  });
-}
+// Always listen for both development and production
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+});

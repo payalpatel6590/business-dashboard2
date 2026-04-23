@@ -15,11 +15,14 @@ import {
 } from "@heroicons/react/24/outline";
 
 // Environment-based Socket.IO configuration
-const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 
-  (process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5000');
+const SOCKET_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://business-dashboard2.onrender.com"
+    : "http://localhost:5000";
 
-// Connect to Socket.IO in both development and production
-const socket = SOCKET_URL ? io(SOCKET_URL) : null;
+const socket = io(SOCKET_URL, {
+  withCredentials: true,
+});
 
 const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
