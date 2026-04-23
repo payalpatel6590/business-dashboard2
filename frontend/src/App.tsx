@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { AdvancedThemeProvider } from './contexts/AdvancedThemeContext';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import LandingPage from './components/Landing/LandingPage';
@@ -13,7 +13,9 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import HistoryTimeline from './components/Dashboard/HistoryTimeline';
 import Portfolio from './components/Dashboard/Portfolio';
 import AnalyticsPage from './components/Dashboard/AnalyticsPage';
+import AIAnalytics from './components/Dashboard/AIAnalytics';
 import AboutPage from './components/Pages/AboutPage';
+import AIAssistant from './components/AI/AIAssistant';
 import './index.css';
 
 function AppContent() {
@@ -40,6 +42,7 @@ function AppContent() {
         }>
           <Route index element={<DashboardHome />} />
           <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="ai-analytics" element={<AIAnalytics />} />
           <Route path="sales" element={<SalesManagement />} />
           <Route path="revenue" element={<RevenueManagement />} />
           <Route path="history" element={<HistoryTimeline />} />
@@ -54,11 +57,12 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
+    <AdvancedThemeProvider>
       <AuthProvider>
         <AppContent />
+        <AIAssistant />
       </AuthProvider>
-    </ThemeProvider>
+    </AdvancedThemeProvider>
   );
 }
 

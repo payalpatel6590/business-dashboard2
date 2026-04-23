@@ -3,7 +3,8 @@ import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { io } from "socket.io-client";
 import { useAuth } from "../../contexts/AuthContext";
-import ThemeToggle from "../Common/ThemeToggle";
+import { useAdvancedTheme } from "../../contexts/AdvancedThemeContext";
+import AdvancedThemeToggle from "../Common/AdvancedThemeToggle";
 import {
   CurrencyDollarIcon,
   UserGroupIcon,
@@ -19,7 +20,8 @@ import {
   BriefcaseIcon,
   ClockIcon,
   ChartBarIcon,
-  SparklesIcon
+  SparklesIcon,
+  CpuChipIcon
 } from "@heroicons/react/24/outline";
 
 const socket = io("http://localhost:5000", {
@@ -55,6 +57,13 @@ const DashboardLayoutPremium: React.FC = () => {
       icon: HomeIcon,
       current: location.pathname === "/dashboard",
       color: "from-blue-500 to-blue-600"
+    },
+    {
+      name: "AI Analytics",
+      href: "/dashboard/ai-analytics",
+      icon: CpuChipIcon,
+      current: location.pathname === "/dashboard/ai-analytics",
+      color: "from-purple-500 to-purple-600"
     },
     {
       name: "Analytics",
@@ -440,8 +449,8 @@ const DashboardLayoutPremium: React.FC = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Theme Toggle */}
-              <ThemeToggle />
+              {/* Advanced Theme Toggle */}
+              <AdvancedThemeToggle />
             </div>
           </div>
         </header>
