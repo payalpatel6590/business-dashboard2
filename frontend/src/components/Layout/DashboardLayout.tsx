@@ -14,13 +14,8 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/outline";
 
-// Environment-based Socket.IO configuration
-const SOCKET_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://business-dashboard2.onrender.com"
-    : "http://localhost:5000";
-
-const socket = io(SOCKET_URL, {
+// Use deployed backend URL for all environments
+const socket = io("https://business-dashboard2.onrender.com", {
   withCredentials: true,
 });
 
