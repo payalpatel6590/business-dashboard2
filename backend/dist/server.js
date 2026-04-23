@@ -24,10 +24,7 @@ const server = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(server, {
     cors: {
         origin: [
-            process.env.FRONTEND_URL || 'http://localhost:3000',
-            'http://localhost:3001',
-            'http://localhost:3002',
-            'http://localhost:3003'
+            process.env.FRONTEND_URL || 'https://business-dashboard2-m69e.vercel.app'
         ],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true,
@@ -49,10 +46,7 @@ app.use((0, helmet_1.default)());
 app.use(limiter);
 app.use((0, cors_1.default)({
     origin: [
-        process.env.FRONTEND_URL || 'http://localhost:3000',
-        'http://localhost:3001',
-        'http://localhost:3002',
-        'http://localhost:3003'
+        process.env.FRONTEND_URL || 'https://business-dashboard2-m69e.vercel.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
