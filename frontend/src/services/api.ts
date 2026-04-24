@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ApiResponse, AuthResponse, LoginCredentials, RegisterCredentials, DashboardStats, Sale, Revenue, ChartData, SaleFormData, RevenueFormData } from '../types';
+import { AuthResponse, LoginCredentials, RegisterCredentials, DashboardStats, Sale, Revenue, ChartData, SaleFormData, RevenueFormData } from '../types';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://business-dashboard2.onrender.com/api';
 

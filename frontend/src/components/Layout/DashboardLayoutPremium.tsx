@@ -129,7 +129,7 @@ const DashboardLayoutPremium: React.FC = () => {
       socket.off('connect');
       socket.off('notification');
     };
-  }, [socket]);
+  }, []);
 
   const markNotificationAsRead = (id: string) => {
     setNotifications((prev) =>
